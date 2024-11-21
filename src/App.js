@@ -5,7 +5,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login } from "./pagess/Login";
 import { Register } from "./pagess/Register";
 import { Home } from "./pagess/home";
-
+import { UserProvider } from "./context/UserContext";
+import { ProtectedRoute } from "./components/ProtectedRoutes";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,10 +18,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home />,
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 }

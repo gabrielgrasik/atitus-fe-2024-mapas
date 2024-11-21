@@ -1,20 +1,12 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-/**
- * interceptar o submit do form - ok
- * prevenir que o formulario recarregue toda a página - ok
- * definir os imputs obrigatórios e suas configurações - ok
- * pegar os valores preenchidos nos inputs
- * chamar a API passando o payload solictado
- * ** Endpoint: https://apibase2-0bttgosp.b4a.run/auth/signin
- ** payload: { email: "string", senha: "string" }
- * receber e tratar o retorno da API
- */
+import { UserContext } from "../context/UserContext"; // Correct import
 
 export function Login() {
+  const { login } = useContext(UserContext); // Accessing the login function
+
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
-
     const email = event.target.email.value;
     const senha = event.target.senha.value;
 
@@ -22,13 +14,14 @@ export function Login() {
       alert("Preencha e-mail e senha");
       return;
     }
+
     try {
-      const response = await fletch(
+      const response = await fetch(
         "https://apibase2-0bttgosp.b4a.run/auth/signin",
         {
           method: "POST",
           headers: {
-            "Constant-Type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             email,
@@ -37,33 +30,30 @@ export function Login() {
         }
       );
 
-      if (response.status != 200) {
+      if (response.status !== 200) {
         throw new Error("Usuário ou senha inválidos");
       }
 
       const jsonWebToken = await response.text();
-
       console.log("Login funcionou", jsonWebToken);
+
+      login(jsonWebToken); // Store the token in context
     } catch (error) {
       alert("Usuário ou senha inválidos");
     }
   };
+
   return (
     <main className="d-flex flex-column align-items-center">
       <img src="https://placehold.co/120" alt="" width="120" className="my-4" />
-
       <form onSubmit={handleSubmitLogin}>
         <div className="mb-3">
-          <label for="" className="form-label">
-            Email:
-          </label>
+          <label className="form-label">Email:</label>
           <input type="email" className="form-control" name="email" required />
         </div>
 
         <div className="mb-3">
-          <label for="" className="form-label">
-            Senha:
-          </label>
+          <label className="form-label">Senha:</label>
           <input
             type="password"
             className="form-control"
@@ -74,7 +64,7 @@ export function Login() {
           />
         </div>
 
-        <button type="submit" class="btn btn-primary mb-4">
+        <button type="submit" className="btn btn-primary mb-4">
           Acessar
         </button>
       </form>
