@@ -54,7 +54,12 @@ export function Register() {
 
   return (
     <main className="d-flex flex-column align-items-center pb-5">
-      <img src="https://placehold.co/120" alt="" width="120" className="my-4" />
+      <img
+        src="https://tse4.mm.bing.net/th?id=OIP.jQVFA6Ro-isXWHm-DjrliQHaHa&pid=Api&P=0&h=180"
+        alt=""
+        width="120"
+        className="my-4"
+      />
 
       <form onSubmit={handleFormCadastroSubmit}>
         <div className="mb-3">

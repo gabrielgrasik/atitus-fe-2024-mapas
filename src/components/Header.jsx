@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
-export function Header() {
+const Header = () => {
   const { logout } = useContext(UserContext);
   return (
     <header
@@ -9,9 +9,11 @@ export function Header() {
       data-bs-theme="dark"
     >
       <h2 className="text-white">Logo</h2>
-      <button className="btn btn-priamry" onClick={() => logout()}>
+      <button className="btn btn-primary" onClick={logout}>
         Sair
       </button>
     </header>
   );
-}
+};
+
+export default Header;
