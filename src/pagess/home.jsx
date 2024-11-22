@@ -47,7 +47,7 @@ export function Home() {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "não pode subir pro GIT",
+    googleMapsApiKey: "",
   });
 
   const onLoad = (map) => {
