@@ -47,7 +47,7 @@ export function Home() {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "",
+    googleMapsApiKey: "############",
   });
 
   const onLoad = (map) => {
