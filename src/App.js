@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import "./assets/global.css";
 import { Login } from "./pagess/Login";
 import { Register } from "./pagess/Register";
 import { Home } from "./pagess/home";
